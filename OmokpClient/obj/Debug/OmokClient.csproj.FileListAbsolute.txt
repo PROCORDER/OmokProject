@@ -1,0 +1,11 @@
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.Login.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.csproj.GenerateResource.cache
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.SignUpForm.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\Debug\OmokClient.exe.config
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\Debug\OmokClient.exe
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\Debug\OmokClient.pdb
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.Properties.Resources.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.exe
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.pdb
