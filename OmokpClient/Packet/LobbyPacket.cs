@@ -35,6 +35,7 @@ namespace OmokClient
         string lobbyMyName;
         string message;
         int lobbyAction;
+        int roomCode;
 
         bool inRoom;
         string roomName;
