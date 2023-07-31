@@ -1,0 +1,6 @@
+C:\Users\user\Desktop\study\OMOKproject\Packet\bin\Debug\Packet.dll
+C:\Users\user\Desktop\study\OMOKproject\Packet\bin\Debug\Packet.pdb
+C:\Users\user\Desktop\study\OMOKproject\Packet\obj\Debug\Packet.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\study\OMOKproject\Packet\obj\Debug\Packet.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\study\OMOKproject\Packet\obj\Debug\Packet.dll
+C:\Users\user\Desktop\study\OMOKproject\Packet\obj\Debug\Packet.pdb

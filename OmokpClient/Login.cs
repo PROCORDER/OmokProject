@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
+
 namespace OmokClient
 {
     public partial class Login : Form
@@ -15,6 +16,9 @@ namespace OmokClient
         private TcpClient client;
         private NetworkStream stream;
         private bool connected = false;
+        
+        
+
 
         public Login()
         {
@@ -23,6 +27,7 @@ namespace OmokClient
 
         private void Login_Load(object sender, EventArgs e)
         {
+            ConnectToServer();
 
         }
         private void ConnectToServer()

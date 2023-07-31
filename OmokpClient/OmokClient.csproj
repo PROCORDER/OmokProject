@@ -58,25 +58,22 @@
     <Compile Include="Form\InRoomForm.Designer.cs">
       <DependentUpon>InRoomForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packet\LobbyPacket.cs" />
-    <Compile Include="Packet\LoginPacket.cs" />
-    <Compile Include="Packet\Packet.cs" />
     <Compile Include="Component1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Component1.Designer.cs">
       <DependentUpon>Component1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\Login.cs">
+    <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Login.Designer.cs">
+    <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayGameForm.cs">
+    <Compile Include="Form\PlayGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlayGameForm.Designer.cs">
+    <Compile Include="Form\PlayGameForm.Designer.cs">
       <DependentUpon>PlayGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -87,14 +84,13 @@
     <Compile Include="Form\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packet\SignUpPacket.cs" />
-    <EmbeddedResource Include="Form\Login.resx">
+    <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\InRoomForm.resx">
       <DependentUpon>InRoomForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlayGameForm.resx">
+    <EmbeddedResource Include="Form\PlayGameForm.resx">
       <DependentUpon>PlayGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -134,6 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Packet\Packet.csproj">
+      <Project>{bacfede6-7134-42aa-afa9-7c56905e81f7}</Project>
+      <Name>Packet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

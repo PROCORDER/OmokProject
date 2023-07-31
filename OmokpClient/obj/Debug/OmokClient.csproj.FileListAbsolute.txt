@@ -9,3 +9,9 @@ C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\Debug\OmokClient.pdb
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.Properties.Resources.resources
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.exe
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.pdb
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.InRoomForm.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.PlayGameForm.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.Robby.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\Debug\Packet.dll
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\Debug\Packet.pdb
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\Debug\OmokClient.csproj.CopyComplete
