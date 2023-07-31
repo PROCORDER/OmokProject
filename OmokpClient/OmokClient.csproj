@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Robby.cs">
+    <Compile Include="Form\Robby.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Robby.Designer.cs">
+    <Compile Include="Form\Robby.Designer.cs">
       <DependentUpon>Robby.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\InRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\InRoomForm.Designer.cs">
+      <DependentUpon>InRoomForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Packet\LobbyPacket.cs" />
     <Compile Include="Packet\LoginPacket.cs" />
@@ -79,6 +85,9 @@
     <EmbeddedResource Include="Form\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\InRoomForm.resx">
+      <DependentUpon>InRoomForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -92,7 +101,7 @@
     <EmbeddedResource Include="Form\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Robby.resx">
+    <EmbeddedResource Include="Form\Robby.resx">
       <DependentUpon>Robby.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
