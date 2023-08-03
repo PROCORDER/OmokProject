@@ -30,9 +30,9 @@ namespace OmokClient
         private void InitializeComponent()
         {
             this.LoginPictureBox = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.LoginTextBox = new System.Windows.Forms.TextBox();
+            this.SignupButton = new System.Windows.Forms.Button();
+            this.LoginButton = new System.Windows.Forms.Button();
+            this.LoginIDTextBox = new System.Windows.Forms.TextBox();
             this.LoginPWBox = new System.Windows.Forms.TextBox();
             this.LoginIDLabel = new System.Windows.Forms.Label();
             this.LoginPWLabel = new System.Windows.Forms.Label();
@@ -42,44 +42,51 @@ namespace OmokClient
             // LoginPictureBox
             // 
             this.LoginPictureBox.Image = global::OmokClient.Properties.Resources.OmokLoginJpg;
-            this.LoginPictureBox.Location = new System.Drawing.Point(12, 52);
+            this.LoginPictureBox.Location = new System.Drawing.Point(14, 65);
+            this.LoginPictureBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LoginPictureBox.Name = "LoginPictureBox";
-            this.LoginPictureBox.Size = new System.Drawing.Size(212, 169);
+            this.LoginPictureBox.Size = new System.Drawing.Size(242, 211);
             this.LoginPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LoginPictureBox.TabIndex = 0;
             this.LoginPictureBox.TabStop = false;
             // 
-            // button1
+            // SignupButton
             // 
-            this.button1.Location = new System.Drawing.Point(256, 235);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Sign up";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SignupButton.Location = new System.Drawing.Point(293, 294);
+            this.SignupButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.SignupButton.Name = "SignupButton";
+            this.SignupButton.Size = new System.Drawing.Size(86, 29);
+            this.SignupButton.TabIndex = 1;
+            this.SignupButton.Text = "Sign up";
+            this.SignupButton.UseVisualStyleBackColor = true;
+            this.SignupButton.Click += new System.EventHandler(this.SignupButton_Click);
             // 
-            // button2
+            // LoginButton
             // 
-            this.button2.Location = new System.Drawing.Point(387, 235);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Login";
-            this.button2.UseVisualStyleBackColor = true;
+            this.LoginButton.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.LoginButton.Location = new System.Drawing.Point(442, 294);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(86, 29);
+            this.LoginButton.TabIndex = 2;
+            this.LoginButton.Text = "Login";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // LoginTextBox
+            // LoginIDTextBox
             // 
-            this.LoginTextBox.Location = new System.Drawing.Point(287, 81);
-            this.LoginTextBox.Name = "LoginTextBox";
-            this.LoginTextBox.Size = new System.Drawing.Size(177, 21);
-            this.LoginTextBox.TabIndex = 3;
+            this.LoginIDTextBox.Location = new System.Drawing.Point(328, 101);
+            this.LoginIDTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.LoginIDTextBox.Name = "LoginIDTextBox";
+            this.LoginIDTextBox.Size = new System.Drawing.Size(202, 25);
+            this.LoginIDTextBox.TabIndex = 3;
             // 
             // LoginPWBox
             // 
-            this.LoginPWBox.Location = new System.Drawing.Point(287, 171);
+            this.LoginPWBox.Location = new System.Drawing.Point(328, 214);
+            this.LoginPWBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LoginPWBox.Name = "LoginPWBox";
-            this.LoginPWBox.Size = new System.Drawing.Size(177, 21);
+            this.LoginPWBox.Size = new System.Drawing.Size(202, 25);
             this.LoginPWBox.TabIndex = 4;
             // 
             // LoginIDLabel
@@ -88,9 +95,9 @@ namespace OmokClient
             this.LoginIDLabel.BackColor = System.Drawing.Color.Transparent;
             this.LoginIDLabel.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.LoginIDLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.LoginIDLabel.Location = new System.Drawing.Point(254, 84);
+            this.LoginIDLabel.Location = new System.Drawing.Point(290, 105);
             this.LoginIDLabel.Name = "LoginIDLabel";
-            this.LoginIDLabel.Size = new System.Drawing.Size(25, 19);
+            this.LoginIDLabel.Size = new System.Drawing.Size(31, 24);
             this.LoginIDLabel.TabIndex = 5;
             this.LoginIDLabel.Text = "ID";
             // 
@@ -100,31 +107,33 @@ namespace OmokClient
             this.LoginPWLabel.BackColor = System.Drawing.Color.Transparent;
             this.LoginPWLabel.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.LoginPWLabel.ForeColor = System.Drawing.Color.Coral;
-            this.LoginPWLabel.Location = new System.Drawing.Point(247, 174);
+            this.LoginPWLabel.Location = new System.Drawing.Point(282, 218);
             this.LoginPWLabel.Name = "LoginPWLabel";
-            this.LoginPWLabel.Size = new System.Drawing.Size(37, 19);
+            this.LoginPWLabel.Size = new System.Drawing.Size(47, 24);
             this.LoginPWLabel.TabIndex = 6;
             this.LoginPWLabel.Text = "PW";
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(175)))), ((int)(((byte)(159)))));
             this.BackgroundImage = global::OmokClient.Properties.Resources.LoginBackgroundImg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(494, 276);
+            this.ClientSize = new System.Drawing.Size(565, 345);
             this.Controls.Add(this.LoginPWLabel);
             this.Controls.Add(this.LoginIDLabel);
             this.Controls.Add(this.LoginPWBox);
-            this.Controls.Add(this.LoginTextBox);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LoginIDTextBox);
+            this.Controls.Add(this.LoginButton);
+            this.Controls.Add(this.SignupButton);
             this.Controls.Add(this.LoginPictureBox);
             this.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Login";
             this.Text = "OmokGame";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
             this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.LoginPictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -135,9 +144,9 @@ namespace OmokClient
         #endregion
 
         private System.Windows.Forms.PictureBox LoginPictureBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox LoginTextBox;
+        private System.Windows.Forms.Button SignupButton;
+        private System.Windows.Forms.Button LoginButton;
+        private System.Windows.Forms.TextBox LoginIDTextBox;
         private System.Windows.Forms.TextBox LoginPWBox;
         private System.Windows.Forms.Label LoginIDLabel;
         private System.Windows.Forms.Label LoginPWLabel;

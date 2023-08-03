@@ -11,7 +11,10 @@ namespace OmokPacket
     public enum PacketType
     {
         LOGIN = 0,
-        SIGNUP
+        SIGNUP,
+        LOBBY,
+        PLAYGAME
+
     }
 
 
@@ -19,25 +22,28 @@ namespace OmokPacket
     public class Packet
     {
         public const int Max = 9999;
-        public int Length;
-        public int Type;
+        public int length { get; set; }
+        public int type{get; set;}
         public Packet()
         {
-            this.Length = 0;
-            this.Type = 0;
+            this.length = 0;
+            this.type = 0;
         }
+        
 
         //직렬화 함수
-        public static byte[] Serialize(object o)
+        public  byte[] Serialize(object o)
         {
             MemoryStream ms = new MemoryStream(1024 * 4);
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(ms, o);
+    
+
             return ms.ToArray();
         }
 
         //역직렬화 함수
-        public static object Desserialize(byte[] bt)
+        public static  object Desserialize(byte[] bt)
         {
             MemoryStream ms = new MemoryStream(1024 * 4);
             foreach (byte b in bt)
