@@ -26,13 +26,13 @@ namespace OmokPacket
         public int type{get; set;}
         public Packet()
         {
-            this.length = 0;
+            this.length = 4096;
             this.type = 0;
         }
         
 
         //직렬화 함수
-        public  byte[] Serialize(object o)
+        public  static byte[] Serialize(object o)
         {
             MemoryStream ms = new MemoryStream(1024 * 4);
             BinaryFormatter bf = new BinaryFormatter();

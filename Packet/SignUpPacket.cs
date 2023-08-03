@@ -7,17 +7,29 @@ using OmokPacket;
 
 namespace OmokPacket
 {
-    class SignUpPacket
+    public enum SignUpErrorType
     {
-        string signUpID;
-        string signUpPW;
-        bool signUpCheck;
+        ALLOK = 0,
+        IDERR,
+        NAMEERR
         
+    }
+
+    public class SignUpPacket:Packet
+    {
+        public string signUpName { get; set; }
+        public string signUpID { get; set; }
+        public string signUpPW { get; set; }
+
+        public int signUpCheck { get; set; }
+
         public SignUpPacket()
         {
             this.signUpID = null;
             this.signUpPW = null;
-            this.signUpCheck = false;
+            int signUpCheck = 0;
+            type = (int)PacketType.SIGNUP;
+            length = 4096;
 
         }
     }

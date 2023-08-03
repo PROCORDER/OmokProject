@@ -85,7 +85,7 @@ namespace OmokClient
             LoginPacket loginPacket = new LoginPacket();
             loginPacket.loginID = LoginIDTextBox.Text;
             loginPacket.loginPW = LoginPWBox.Text;
-            loginPacket.Serialize(loginPacket).CopyTo(sendBuffer, 0);
+            Packet.Serialize(loginPacket).CopyTo(sendBuffer, 0);
 
             Send();
             
@@ -106,6 +106,8 @@ namespace OmokClient
             }
 
         }
+
+
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
