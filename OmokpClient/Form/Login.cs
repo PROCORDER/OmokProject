@@ -50,7 +50,6 @@ namespace OmokClient
 
                 
                 connected = true;
-                Console.WriteLine("서버에 연결되었습니다.");
             }
             catch (Exception ex)
             {
@@ -95,6 +94,8 @@ namespace OmokClient
             {
                 this.Hide();
                 Robby RobbyForm = new Robby();
+                RobbyForm.myName = readLoginPacket.loginName;
+                RobbyForm.myName = readLoginPacket.loginID;
                 RobbyForm.ShowDialog();
                 this.Close();
             }

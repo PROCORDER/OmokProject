@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form\Robby.cs">
+    <Compile Include="Form\Lobby.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Robby.Designer.cs">
-      <DependentUpon>Robby.cs</DependentUpon>
+    <Compile Include="Form\Lobby.Designer.cs">
+      <DependentUpon>Lobby.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\InRoomForm.cs">
       <SubType>Form</SubType>
@@ -106,8 +106,8 @@
     <EmbeddedResource Include="Form\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Robby.resx">
-      <DependentUpon>Robby.cs</DependentUpon>
+    <EmbeddedResource Include="Form\Lobby.resx">
+      <DependentUpon>Lobby.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

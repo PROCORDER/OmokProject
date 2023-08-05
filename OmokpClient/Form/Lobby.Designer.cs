@@ -29,6 +29,7 @@ namespace OmokClient
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -37,7 +38,7 @@ namespace OmokClient
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.FriendAddButton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.SendMessageBox = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.FriendListBox = new System.Windows.Forms.ListBox();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -49,9 +50,12 @@ namespace OmokClient
             this.RoomListBox = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.MakeRoomButton = new System.Windows.Forms.Button();
             this.FindButton = new System.Windows.Forms.Button();
             this.FindRoomLabel = new System.Windows.Forms.Label();
             this.FindRoom = new System.Windows.Forms.TextBox();
+            this.PlayerHistory = new System.Windows.Forms.Label();
+            this.RefreshRoomList = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -108,9 +112,9 @@ namespace OmokClient
             this.panel2.Controls.Add(this.panel9);
             this.panel2.Controls.Add(this.panel6);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(631, 0);
+            this.panel2.Location = new System.Drawing.Point(636, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(346, 677);
+            this.panel2.Size = new System.Drawing.Size(341, 677);
             this.panel2.TabIndex = 1;
             // 
             // panel9
@@ -120,17 +124,17 @@ namespace OmokClient
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(0, 237);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(346, 440);
+            this.panel9.Size = new System.Drawing.Size(341, 440);
             this.panel9.TabIndex = 1;
             // 
             // panel11
             // 
             this.panel11.Controls.Add(this.FriendAddButton);
-            this.panel11.Controls.Add(this.textBox2);
+            this.panel11.Controls.Add(this.SendMessageBox);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel11.Location = new System.Drawing.Point(0, 412);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(346, 28);
+            this.panel11.Size = new System.Drawing.Size(341, 28);
             this.panel11.TabIndex = 5;
             // 
             // FriendAddButton
@@ -141,13 +145,14 @@ namespace OmokClient
             this.FriendAddButton.TabIndex = 4;
             this.FriendAddButton.Text = "추가";
             this.FriendAddButton.UseVisualStyleBackColor = true;
+            this.FriendAddButton.Click += new System.EventHandler(this.FriendAddButton_Click);
             // 
-            // textBox2
+            // SendMessageBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(0, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(259, 25);
-            this.textBox2.TabIndex = 0;
+            this.SendMessageBox.Location = new System.Drawing.Point(0, 3);
+            this.SendMessageBox.Name = "SendMessageBox";
+            this.SendMessageBox.Size = new System.Drawing.Size(259, 25);
+            this.SendMessageBox.TabIndex = 0;
             // 
             // panel10
             // 
@@ -155,7 +160,7 @@ namespace OmokClient
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(346, 440);
+            this.panel10.Size = new System.Drawing.Size(341, 440);
             this.panel10.TabIndex = 4;
             // 
             // FriendListBox
@@ -165,19 +170,19 @@ namespace OmokClient
             this.FriendListBox.ItemHeight = 15;
             this.FriendListBox.Location = new System.Drawing.Point(0, 0);
             this.FriendListBox.Name = "FriendListBox";
-            this.FriendListBox.Size = new System.Drawing.Size(346, 440);
+            this.FriendListBox.Size = new System.Drawing.Size(341, 440);
             this.FriendListBox.TabIndex = 1;
-            this.FriendListBox.SelectedIndexChanged += new System.EventHandler(this.FriendListBox_SelectedIndexChanged);
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.PlayerHistory);
             this.panel6.Controls.Add(this.PlayerID);
             this.panel6.Controls.Add(this.PlayerName);
             this.panel6.Controls.Add(this.playerPicture);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(346, 237);
+            this.panel6.Size = new System.Drawing.Size(341, 237);
             this.panel6.TabIndex = 0;
             // 
             // PlayerID
@@ -207,7 +212,7 @@ namespace OmokClient
             this.playerPicture.Dock = System.Windows.Forms.DockStyle.Top;
             this.playerPicture.Location = new System.Drawing.Point(0, 0);
             this.playerPicture.Name = "playerPicture";
-            this.playerPicture.Size = new System.Drawing.Size(346, 199);
+            this.playerPicture.Size = new System.Drawing.Size(341, 199);
             this.playerPicture.TabIndex = 4;
             this.playerPicture.TabStop = false;
             // 
@@ -218,7 +223,7 @@ namespace OmokClient
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(631, 677);
+            this.panel3.Size = new System.Drawing.Size(636, 677);
             this.panel3.TabIndex = 2;
             // 
             // panel5
@@ -228,7 +233,7 @@ namespace OmokClient
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 54);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(631, 623);
+            this.panel5.Size = new System.Drawing.Size(636, 623);
             this.panel5.TabIndex = 0;
             // 
             // RoomListBox
@@ -238,8 +243,9 @@ namespace OmokClient
             this.RoomListBox.ItemHeight = 15;
             this.RoomListBox.Location = new System.Drawing.Point(0, 0);
             this.RoomListBox.Name = "RoomListBox";
-            this.RoomListBox.Size = new System.Drawing.Size(631, 623);
+            this.RoomListBox.Size = new System.Drawing.Size(636, 623);
             this.RoomListBox.TabIndex = 3;
+            this.RoomListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.RoomListBox_MouseDoubleClick);
             // 
             // textBox1
             // 
@@ -250,24 +256,37 @@ namespace OmokClient
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.MakeRoomButton);
             this.panel4.Controls.Add(this.FindButton);
             this.panel4.Controls.Add(this.FindRoomLabel);
             this.panel4.Controls.Add(this.FindRoom);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(631, 54);
+            this.panel4.Size = new System.Drawing.Size(636, 54);
             this.panel4.TabIndex = 0;
+            // 
+            // MakeRoomButton
+            // 
+            this.MakeRoomButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.MakeRoomButton.Location = new System.Drawing.Point(0, 0);
+            this.MakeRoomButton.Name = "MakeRoomButton";
+            this.MakeRoomButton.Size = new System.Drawing.Size(104, 54);
+            this.MakeRoomButton.TabIndex = 7;
+            this.MakeRoomButton.Text = "찾기";
+            this.MakeRoomButton.UseVisualStyleBackColor = true;
+            this.MakeRoomButton.Click += new System.EventHandler(this.FindRoomButton_Click);
             // 
             // FindButton
             // 
             this.FindButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FindButton.Location = new System.Drawing.Point(519, 0);
+            this.FindButton.Location = new System.Drawing.Point(524, 0);
             this.FindButton.Name = "FindButton";
             this.FindButton.Size = new System.Drawing.Size(112, 54);
             this.FindButton.TabIndex = 5;
             this.FindButton.Text = "찾기";
             this.FindButton.UseVisualStyleBackColor = true;
+            this.FindButton.Click += new System.EventHandler(this.FindRoomButton_Click);
             // 
             // FindRoomLabel
             // 
@@ -278,7 +297,6 @@ namespace OmokClient
             this.FindRoomLabel.Size = new System.Drawing.Size(102, 27);
             this.FindRoomLabel.TabIndex = 1;
             this.FindRoomLabel.Text = "방 이름";
-            this.FindRoomLabel.Click += new System.EventHandler(this.FindRoomLabel_Click);
             // 
             // FindRoom
             // 
@@ -287,7 +305,20 @@ namespace OmokClient
             this.FindRoom.Name = "FindRoom";
             this.FindRoom.Size = new System.Drawing.Size(420, 34);
             this.FindRoom.TabIndex = 0;
-            this.FindRoom.TextChanged += new System.EventHandler(this.FindRoom_TextChanged);
+            // 
+            // PlayerHistory
+            // 
+            this.PlayerHistory.AutoSize = true;
+            this.PlayerHistory.Font = new System.Drawing.Font("굴림", 10F);
+            this.PlayerHistory.Location = new System.Drawing.Point(168, 205);
+            this.PlayerHistory.Name = "PlayerHistory";
+            this.PlayerHistory.Size = new System.Drawing.Size(49, 17);
+            this.PlayerHistory.TabIndex = 7;
+            this.PlayerHistory.Text = "label2";
+            // 
+            // RefreshRoomList
+            // 
+            this.RefreshRoomList.Tick += new System.EventHandler(this.RefreshRoomList_Tick);
             // 
             // Robby
             // 
@@ -299,6 +330,7 @@ namespace OmokClient
             this.Controls.Add(this.panel1);
             this.Name = "Robby";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Robby_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -336,7 +368,7 @@ namespace OmokClient
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Button FriendAddButton;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox SendMessageBox;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.ListBox FriendListBox;
         private System.Windows.Forms.Panel panel6;
@@ -345,5 +377,8 @@ namespace OmokClient
         private System.Windows.Forms.PictureBox playerPicture;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button FindButton;
+        private System.Windows.Forms.Button MakeRoomButton;
+        private System.Windows.Forms.Label PlayerHistory;
+        private System.Windows.Forms.Timer RefreshRoomList;
     }
 }
