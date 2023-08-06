@@ -42,6 +42,7 @@ namespace OmokClient
             this.panel10 = new System.Windows.Forms.Panel();
             this.FriendListBox = new System.Windows.Forms.ListBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.PlayerHistory = new System.Windows.Forms.Label();
             this.PlayerID = new System.Windows.Forms.Label();
             this.PlayerName = new System.Windows.Forms.Label();
             this.playerPicture = new System.Windows.Forms.PictureBox();
@@ -54,7 +55,6 @@ namespace OmokClient
             this.FindButton = new System.Windows.Forms.Button();
             this.FindRoomLabel = new System.Windows.Forms.Label();
             this.FindRoom = new System.Windows.Forms.TextBox();
-            this.PlayerHistory = new System.Windows.Forms.Label();
             this.RefreshRoomList = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -185,6 +185,16 @@ namespace OmokClient
             this.panel6.Size = new System.Drawing.Size(341, 237);
             this.panel6.TabIndex = 0;
             // 
+            // PlayerHistory
+            // 
+            this.PlayerHistory.AutoSize = true;
+            this.PlayerHistory.Font = new System.Drawing.Font("굴림", 10F);
+            this.PlayerHistory.Location = new System.Drawing.Point(168, 205);
+            this.PlayerHistory.Name = "PlayerHistory";
+            this.PlayerHistory.Size = new System.Drawing.Size(49, 17);
+            this.PlayerHistory.TabIndex = 7;
+            this.PlayerHistory.Text = "label2";
+            // 
             // PlayerID
             // 
             this.PlayerID.AutoSize = true;
@@ -305,16 +315,6 @@ namespace OmokClient
             this.FindRoom.Name = "FindRoom";
             this.FindRoom.Size = new System.Drawing.Size(420, 34);
             this.FindRoom.TabIndex = 0;
-            // 
-            // PlayerHistory
-            // 
-            this.PlayerHistory.AutoSize = true;
-            this.PlayerHistory.Font = new System.Drawing.Font("굴림", 10F);
-            this.PlayerHistory.Location = new System.Drawing.Point(168, 205);
-            this.PlayerHistory.Name = "PlayerHistory";
-            this.PlayerHistory.Size = new System.Drawing.Size(49, 17);
-            this.PlayerHistory.TabIndex = 7;
-            this.PlayerHistory.Text = "label2";
             // 
             // RefreshRoomList
             // 

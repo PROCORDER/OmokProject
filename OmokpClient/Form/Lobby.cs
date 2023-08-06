@@ -31,6 +31,8 @@ namespace OmokClient
 
         int LobbyPort = 7777;
         int ChatPort = 8888;
+
+        private readonly object Lobbylock = new object();
         public Robby()
         {
             InitializeComponent();
@@ -157,9 +159,39 @@ namespace OmokClient
             }
         }
 
-        private void RoomListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        async private void RoomListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            EnterRoom enterRoom=new EnterRoom(myName);
+            string selectedItemText = RoomListBox.SelectedItem.ToString();
+            enterRoom.roomName = selectedItemText;
+            await Task.Run(() =>
+            {
+                lock(Lobbylock)
+                {
+                    Packet.Serialize(enterRoom).CopyTo(LobbysendBuffer, 0);
 
+                    Send(LobbysendBuffer, Lobbystream);
+
+                    int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
+                    enterRoom = (EnterRoom)Packet.Desserialize(LobbyreadBuffer);
+                }
+                if (enterRoom.bEnterRoom == true)
+                {
+                    this.Hide();
+                    this.Enabled = false;
+                    InRoomForm inRoomForm = new InRoomForm(myName,enterRoom.roomName);
+                    inRoomForm.ShowDialog();
+                    this.Show();
+                    this.Enabled = true;
+
+                }
+                else
+                {
+                    MessageBox.Show("방 입장에 실패하였습니다.", "실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+            
         }
     }
 }

@@ -278,7 +278,6 @@ namespace OmokClient
             this.playGuest.Size = new System.Drawing.Size(0, 264);
             this.playGuest.TabIndex = 1;
             this.playGuest.TabStop = false;
-            this.playGuest.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panel6
             // 
@@ -337,6 +336,7 @@ namespace OmokClient
             this.Controls.Add(this.panel1);
             this.Name = "InRoomForm";
             this.Text = "InRoomForm";
+            this.Load += new System.EventHandler(this.InRoomForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);

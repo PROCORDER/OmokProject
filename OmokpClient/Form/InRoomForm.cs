@@ -12,19 +12,18 @@ namespace OmokClient
 {
     public partial class InRoomForm : Form
     {
-        public InRoomForm()
+        string myName;
+        string roomName;
+        public InRoomForm(string myName,string roomName)
         {
             InitializeComponent();
+            this.myName = myName;
+            this.roomName = roomName;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void InRoomForm_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
+            this.Text = roomName;
         }
     }
 }
