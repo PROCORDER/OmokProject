@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\user\Desktop\study\OMOKproject\OmokServer\build\CMakeFiles\c7cd2b53c7efb34e4b23a485fc0800eb\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6AC4899D-53F2-3BC7-BE6A-AFE9DDE933C1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
