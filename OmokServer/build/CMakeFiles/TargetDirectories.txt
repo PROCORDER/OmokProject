@@ -1,9 +1,0 @@
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/NightlyMemoryCheck.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/Experimental.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/Continuous.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/Nightly.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/RUN_TESTS.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/OmokServer.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/PACKAGE.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/user/Desktop/study/OMOKproject/OmokServer/build/CMakeFiles/ZERO_CHECK.dir

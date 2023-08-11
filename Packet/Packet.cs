@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using ProtoBuf;
 
 namespace OmokPacket
 {
@@ -13,17 +14,23 @@ namespace OmokPacket
         LOGIN = 0,
         SIGNUP,
         LOBBY,
-        PLAYGAME
+        PLAYGAME,
+        INROOM,
+        SENDMESSAGE,
+        LOBBYLOAD
 
     }
 
 
-    [Serializable]
+    [ProtoContract]
     public class Packet
     {
+        [ProtoMember(1)]
         public const int Max = 9999;
+        [ProtoMember(2)]
         public int length { get; set; }
-        public int type{get; set;}
+        [ProtoMember(3)]
+        public PacketType type{get; set;}
         public Packet()
         {
             this.length = 4096;
@@ -34,11 +41,8 @@ namespace OmokPacket
         //직렬화 함수
         public  static byte[] Serialize(object o)
         {
-            MemoryStream ms = new MemoryStream(1024 * 4);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(ms, o);
-    
-
+            MemoryStream ms = new MemoryStream(1024 * 4);      
+            ProtoBuf.Serializer.Serialize<object>(ms,o);
             return ms.ToArray();
         }
 
@@ -46,14 +50,7 @@ namespace OmokPacket
         public static  object Desserialize(byte[] bt)
         {
             MemoryStream ms = new MemoryStream(1024 * 4);
-            foreach (byte b in bt)
-            {
-                ms.WriteByte(b);
-            }
-
-            ms.Position = 0;
-            BinaryFormatter bf = new BinaryFormatter();
-            object obj = bf.Deserialize(ms);
+            object obj = ProtoBuf.Serializer.Deserialize<object>(ms);
             ms.Close();
             return obj;
         }

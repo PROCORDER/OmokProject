@@ -1,0 +1,2 @@
+C:\Users\user\Desktop\study\OMOKproject\OmokServer\OmokServer\obj\Debug\OmokServer.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\study\OMOKproject\OmokServer\OmokServer\obj\Debug\OmokServer.csproj.CoreCompileInputs.cache

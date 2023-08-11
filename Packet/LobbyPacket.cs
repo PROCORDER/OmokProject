@@ -3,46 +3,139 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ProtoBuf;
 namespace OmokPacket
 {
     public enum ELobbyaction
     {
-        MakeRoom=0,
-        Playwithfriend,
-        Message,
-        Exit
+        MAKEROOM = 0,
+        FINDROOM,
+        PLAYWITH,
+        ADDFRIEND,
+        MESSAGE,
+        LOBBYLOAD,
+        REFRESHROOMLIST,
+        ENTERROOM,
+        EXIT
 
     }
     public enum EWaitingRoomHostAction
     {
-        Play=0,
-        Kick,
-        Invite,
-        Message,
-        Boom
+        PLAY = 0,
+        KICK,
+        INVITE,
+        MESSAGE,
+        BOOM
 
 
     }
     public enum EWaitingRoomGuestAction
     {
-        Message=0,
-        Exit
+        MESSAGE = 0,
+        EXIT
     }
 
-    class LobbyPacket
+    [ProtoContract]
+    public class LobbyPacket : Packet
     {
-        string lobbyMyName;
-        string message;
-        int lobbyAction;
-        int roomCode;
-
-        bool inRoom;
-        string roomName;
-        
-        bool imHost;
-        int hostAction;
-
-        int guestAction;     
+        [ProtoMember(4)]
+        public string MyID { get; set; }
+        [ProtoMember(5)]
+        public int lobbyAction { get; set; }
     }
+
+    [ProtoContract]
+    public class LobbyloadPacket : LobbyPacket {
+        [ProtoMember(6)]
+        public string[] friendList;
+        [ProtoMember(7)]
+        public string[] roomList;
+        [ProtoMember(8)]
+        public string[] Histroy;
+
+        public LobbyloadPacket()
+        {
+            type = PacketType.LOBBY;
+            lobbyAction = (int)ELobbyaction.ADDFRIEND;
+        }
+    }
+
+    [ProtoContract]
+    public class RefreshRoomlistPacket : LobbyPacket {
+        [ProtoMember(6)]
+        public string[] roomList;
+        public RefreshRoomlistPacket()
+        {
+            type = PacketType.LOBBY;
+            lobbyAction = (int)ELobbyaction.REFRESHROOMLIST;
+        }
+    }
+
+    [ProtoContract]
+    public class MakeFriendPacket : LobbyPacket
+    {
+        [ProtoMember(6)]
+        public bool bFriendAddSuccess { get; set; }
+        [ProtoMember(7)]
+        public string addfriendName { get; set; }
+        [ProtoMember(8)]
+        public string[] Friendlist { get; set; }
+
+        public MakeFriendPacket(){
+            type = PacketType.LOBBY;
+            lobbyAction = (int)ELobbyaction.LOBBYLOAD;
+            }
+    }
+
+    [ProtoContract]
+    public class MakeRoom : LobbyPacket
+    {
+        [ProtoMember(6)]
+        public bool makeRommSuccess { get; set; }
+        [ProtoMember(7)]
+        public string roomName { get; set; }
+        [ProtoMember(8)]
+        public int roomCode { get; set; }
+        public MakeRoom()
+        {
+            type = PacketType.LOBBY;
+            lobbyAction = (int)ELobbyaction.MAKEROOM;
+        }
+
+    }
+    
+    [ProtoContract]
+    public class InRoom : LobbyPacket
+    {
+        [ProtoMember(6)]
+        public bool imHost { get; set; }
+        [ProtoMember(7)]
+        public int hostAction { get; set; }
+        [ProtoMember(8)]
+        public int guestAction { get; set; }
+        public InRoom()
+        {
+            type = PacketType.INROOM;
+        }
+    }
+
+    [ProtoContract]
+    public class EnterRoom : LobbyPacket
+    {
+        [ProtoMember(6)]
+        public string roomName { get; set; }
+        [ProtoMember(7)]
+        public string myName { get; set; }
+        [ProtoMember(8)]
+        public bool bEnterRoom { get; set; }
+
+        public EnterRoom(string name)
+        {
+            myName = name;
+            type = PacketType.LOBBY;
+            lobbyAction = (int)ELobbyaction.ENTERROOM;
+        }
+    }
+
+
 }

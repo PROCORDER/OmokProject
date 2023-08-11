@@ -28,7 +28,7 @@ namespace OmokPacket
             this.signUpID = null;
             this.signUpPW = null;
             int signUpCheck = 0;
-            type = (int)PacketType.SIGNUP;
+            type = PacketType.SIGNUP;
             length = 4096;
 
         }
