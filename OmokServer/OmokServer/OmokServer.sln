@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmokServer", "OmokServer.csproj", "{4DD6128D-BF9F-4F5D-BACA-593D071B868C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmokCheckServer", "OmokCheckServer.csproj", "{4DD6128D-BF9F-4F5D-BACA-593D071B868C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLibrary", "..\ServerLibrary\ServerLibrary.csproj", "{6224B79B-C8C5-472C-A99D-2007FC2A3E7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageServer", "..\ManageServer\ManageServer.csproj", "{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{6224B79B-C8C5-472C-A99D-2007FC2A3E7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6224B79B-C8C5-472C-A99D-2007FC2A3E7C}.Release|x64.ActiveCfg = Release|x64
 		{6224B79B-C8C5-472C-A99D-2007FC2A3E7C}.Release|x64.Build.0 = Release|x64
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Debug|x64.Build.0 = Debug|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Release|x64.ActiveCfg = Release|Any CPU
+		{6BE55340-A5BC-4E57-AA06-CB723B92DC5B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

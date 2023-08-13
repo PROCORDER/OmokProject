@@ -91,7 +91,7 @@ namespace OmokClient
         private void FriendAddButton_Click(object sender, EventArgs e)
         {
             MakeFriendPacket lobbyPacket = new MakeFriendPacket();
-            lobbyPacket.lobbyAction = (int)ELobbyaction.ADDFRIEND;
+            lobbyPacket.lobbyAction = ELobbyaction.ADDFRIEND;
             Packet.Serialize(lobbyPacket).CopyTo(LobbysendBuffer, 0);
             
             Send(LobbysendBuffer, Lobbystream);

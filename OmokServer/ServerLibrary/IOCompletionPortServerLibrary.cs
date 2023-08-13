@@ -54,6 +54,7 @@ namespace ServerLibrary
 
         public static byte[] SIgnupProcess(object sender, SocketAsyncEventArgs e,SignUpPacket sendSIgnupPacket)
         {
+            
             byte[] sendBuffer = new byte[1024 * 4];
             string connectionString = "Server=localhost;Database=accounts;User Id=root;Password=1234;";
             string idToCheck = sendSIgnupPacket.signUpID; // 입력한 ID
@@ -103,6 +104,58 @@ namespace ServerLibrary
                 }
             }
 
+        }
+        public static byte[] LobbyLoadProcess(object sender, SocketAsyncEventArgs e, LobbyloadPacket sendLobbyLoadPacket)
+        {
+            byte[] sendBuffer = new byte[1024 * 4];
+            string connectionString = "Server=localhost;Database=accounts;User Id=root;Password=1234;";
+            string checkId = sendLobbyLoadPacket.MyID; // 입력한 ID
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Friend FROM FriendList WHERE HostId = @CheckId";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CheckId", checkId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string friend = reader.GetString("Friend");
+                            sendLobbyLoadPacket.friendList.Add(friend);
+                        }
+                    }
+                }
+
+                query = "SELECT Win,defeat FROM accounts_table WHERE Id = @CheckId";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CheckId", checkId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        sendLobbyLoadPacket.Histroy[0] = reader.GetString(0);
+                        sendLobbyLoadPacket.Histroy[1] = reader.GetString(1);
+
+                    }
+                }
+                query = "SELECT RoomName FROM roomlist ";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        string roomName = reader.GetString("");
+                        sendLobbyLoadPacket.roomList.Add(roomName);
+                    }
+                }
+
+            }
+            Packet.Serialize(sendLobbyLoadPacket).CopyTo(sendBuffer, 0);
+            return sendBuffer;
         }
     }
 }

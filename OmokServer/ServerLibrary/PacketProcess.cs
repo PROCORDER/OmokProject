@@ -60,8 +60,8 @@ namespace ServerLibrary
                     }
                 case PacketType.LOBBYLOAD:
                     {
-                        LoginPacket packet = (LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e, packet);
+                        LobbyloadPacket packet = (LobbyloadPacket)Packet.Desserialize(e.Buffer);
+                        return IOCompletionPortServerLibrary.LobbyLoadProcess(sender, e, packet);
                         
                     }
 

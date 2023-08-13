@@ -41,33 +41,34 @@ namespace OmokPacket
         [ProtoMember(4)]
         public string MyID { get; set; }
         [ProtoMember(5)]
-        public int lobbyAction { get; set; }
+        public ELobbyaction lobbyAction { get; set; }
     }
 
     [ProtoContract]
     public class LobbyloadPacket : LobbyPacket {
         [ProtoMember(6)]
-        public string[] friendList;
+        public List<string> friendList;
         [ProtoMember(7)]
-        public string[] roomList;
+        public List<string> roomList;
         [ProtoMember(8)]
         public string[] Histroy;
 
         public LobbyloadPacket()
         {
             type = PacketType.LOBBY;
-            lobbyAction = (int)ELobbyaction.ADDFRIEND;
+            lobbyAction = ELobbyaction.LOBBYLOAD;
+            Histroy = new string[2];
         }
     }
 
     [ProtoContract]
     public class RefreshRoomlistPacket : LobbyPacket {
         [ProtoMember(6)]
-        public string[] roomList;
+        public List<string> roomList;
         public RefreshRoomlistPacket()
         {
             type = PacketType.LOBBY;
-            lobbyAction = (int)ELobbyaction.REFRESHROOMLIST;
+            lobbyAction = ELobbyaction.REFRESHROOMLIST;
         }
     }
 
@@ -79,11 +80,11 @@ namespace OmokPacket
         [ProtoMember(7)]
         public string addfriendName { get; set; }
         [ProtoMember(8)]
-        public string[] Friendlist { get; set; }
+        public List<string> friendlist { get; set; }
 
         public MakeFriendPacket(){
             type = PacketType.LOBBY;
-            lobbyAction = (int)ELobbyaction.LOBBYLOAD;
+            lobbyAction = ELobbyaction.ADDFRIEND;
             }
     }
 
@@ -133,7 +134,7 @@ namespace OmokPacket
         {
             myName = name;
             type = PacketType.LOBBY;
-            lobbyAction = (int)ELobbyaction.ENTERROOM;
+            lobbyAction = ELobbyaction.ENTERROOM;
         }
     }
 

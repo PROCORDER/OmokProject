@@ -129,6 +129,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ManageServer\ManageServer.csproj">
+      <Project>{6be55340-a5bc-4e57-aa06-cb723b92dc5b}</Project>
+      <Name>ManageServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerLibrary\ServerLibrary.csproj">
       <Project>{6224b79b-c8c5-472c-a99d-2007fc2a3e7c}</Project>
       <Name>ServerLibrary</Name>
