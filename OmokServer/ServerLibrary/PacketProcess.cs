@@ -19,7 +19,7 @@ namespace ServerLibrary
                 case PacketType.LOGIN:
                     {
                         LoginPacket packet=(LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e,packet);
+                        return IOCompletionPortServerLibrary.LoginProcess(packet);
                         
                     }
                  
@@ -27,55 +27,73 @@ namespace ServerLibrary
                 case PacketType.SIGNUP:
                     {
                         SignUpPacket packet = (SignUpPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.SIgnupProcess(sender, e,packet);
+                        return IOCompletionPortServerLibrary.SIgnupProcess(packet);
                         
                     }
 
                 case PacketType.LOBBY:
                     {
-                        LoginPacket packet = (LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e, packet);
-                        
+                        return LobbyPacketType(sender,  e, receivePacket);
+
                     }
 
                 case PacketType.PLAYGAME:
                     {
                         LoginPacket packet = (LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e, packet);
-                        
-                    }
-
-                case PacketType.INROOM:
-                    {
-                        LoginPacket packet = (LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e, packet);
+                        return IOCompletionPortServerLibrary.LoginProcess( packet);
                         
                     }
 
                 case PacketType.SENDMESSAGE:
                     {
                         LoginPacket packet = (LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e, packet);
+                        return IOCompletionPortServerLibrary.LoginProcess( packet);
                         
                     }
                 case PacketType.LOBBYLOAD:
                     {
                         LobbyloadPacket packet = (LobbyloadPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LobbyLoadProcess(sender, e, packet);
+                        return IOCompletionPortServerLibrary.LobbyLoadProcess( packet);
                         
                     }
 
                 default:
                     {
-                        LoginPacket packet = (LoginPacket)Packet.Desserialize(e.Buffer);
-                        return IOCompletionPortServerLibrary.LoginProcess(sender, e, packet);
+                        return null;
                         
                     }
 
             }
         }
+        public static byte[] LobbyPacketType(object sender, SocketAsyncEventArgs e, Packet receivePacket)
+        {
+            LobbyPacket packet=(LobbyPacket)Packet.Desserialize(e.Buffer);
+            switch (packet.lobbyAction)
+            {
+                case ELobbyaction.LOBBYLOAD:
+                    {
+                        LobbyloadPacket lobbyloadpacket = (LobbyloadPacket)Packet.Desserialize(e.Buffer);
+                        return IOCompletionPortServerLibrary.LobbyLoadProcess( lobbyloadpacket);
+                    }
+                case ELobbyaction.ENTERROOM:
+                    {
+                        EnterRoomPacket enterpacket = (EnterRoomPacket)Packet.Desserialize(e.Buffer);
+                        return IOCompletionPortServerLibrary.EnterRoomProcess( enterpacket);
+                    }
+                case ELobbyaction.REFRESHROOMLIST:
+                    {
+                        RefreshRoomlistPacket refreshPacket = (RefreshRoomlistPacket)Packet.Desserialize(e.Buffer);
+                        return IOCompletionPortServerLibrary.RefreshLobbyLoadProcess( refreshPacket);
+                    }
+                case ELobbyaction.MAKEROOM:
+                    {
+                        MakeRoomPacket makeRoomPacket = (MakeRoomPacket)Packet.Desserialize(e.Buffer);
+                        return IOCompletionPortServerLibrary.MakeRoomProcess( makeRoomPacket);
+                    }
+                default:
+                    return null;
 
-
-        
+            }
+        }
     }
 }

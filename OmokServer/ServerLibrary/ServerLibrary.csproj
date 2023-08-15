@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IOCompletionPortServerLibrary.cs" />
+    <Compile Include="LobbyMethod.cs" />
     <Compile Include="PacketProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
