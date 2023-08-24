@@ -12,10 +12,9 @@ using System.Net.Sockets;
 
 namespace OmokClient
 {
-    public partial class Robby : Form
+    public partial class Lobby : Form
     {
-        public string myID { get; set; }
-        public string myName { get; set; }
+        UserInfo user;
 
         private byte[] ChatsendBuffer = new byte[1024 * 4];
         private byte[] ChatreadBuffer = new byte[1024 * 4];
@@ -28,47 +27,69 @@ namespace OmokClient
         private NetworkStream Lobbystream;
         private bool Chatconnected = false;
         private bool Lobbyconnected = false;
+        private RoomInfo room;
+        
 
-        int LobbyPort = 7777;
-        int ChatPort = 8888;
 
         private readonly object Lobbylock = new object();
-        public Robby()
+        private readonly object Chatlock = new object();
+        public Lobby(UserInfo user)
         {
+            room.roomName = "Lobby";
+            this.user = user;
             InitializeComponent();
         }
 
-        private void Robby_Load(object sender, EventArgs e)
+        private async void Lobby_Load(object sender, EventArgs e)
         {
-            ConnectToServer(LobbyPort,Lobbystream,Lobbyclient,Lobbyconnected);
-            ConnectToServer(ChatPort,chatStream,chatClient,Chatconnected);
+            ConnectToServer(PortIP.LOBBYPORT, ref Lobbystream, ref Lobbyclient, ref Lobbyconnected);
+            ConnectToServer(PortIP.CHECKPORT, ref chatStream, ref chatClient, ref Chatconnected);
 
-            LobbyloadPacket robbyloadPacket = new LobbyloadPacket();
-            robbyloadPacket.MyID = myID;
-            Packet.Serialize(robbyloadPacket).CopyTo(LobbysendBuffer,0);
+            LobbyloadPacket lobbyLoadPacket = new LobbyloadPacket();
+            lobbyLoadPacket.user = user;
+            Packet.Serialize(lobbyLoadPacket).CopyTo(LobbysendBuffer, 0);
 
-            Send(LobbysendBuffer,Lobbystream);
+            ClientIOMethod.Send(LobbysendBuffer, Lobbystream);
 
             int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
             LobbyloadPacket readLobbyloadPacket = (LobbyloadPacket)Packet.Desserialize(LobbyreadBuffer);
 
 
-            PlayerName.Text = myName;
-            PlayerID.Text = myID;
-            PlayerHistory.Text = "(" + readLobbyloadPacket.Histroy[0] + "승"  + readLobbyloadPacket.Histroy[1]+"패" + ")";
+            PlayerName.Text = user.MyName;
+            PlayerID.Text = user.MyId;
+            PlayerHistory.Text = "(" + readLobbyloadPacket.user.History[0] + "승" + readLobbyloadPacket.user.History[1] + "패" + ")";
 
+            Invoke((MethodInvoker)delegate
+            {
+                RoomListBox.Items.Clear();
+                foreach (string list in readLobbyloadPacket.roomList)
+                {
+                    RoomListBox.Invoke(new Action(() =>
+                    {
+                        RoomListBox.Items.Add(list);
+                    }));
+                }
+                FriendListBox.Items.Clear();
+                foreach (string list in readLobbyloadPacket.user.friendList)
+                {
+                    FriendListBox.Invoke(new Action(() =>
+                    {
+                        FriendListBox.Items.Add(list);
+                    }));
+                }
 
+            });
+           
+            await ReadChat(chatStream);
         }
-        private void ConnectToServer(int Port,NetworkStream stream,TcpClient client,bool connected)
+        private void ConnectToServer(int Port, ref NetworkStream stream, ref TcpClient client, ref bool connected)
         {
             try
             {
 
-                string serverIP = "서버의 IP 주소";
-               
                 client = new TcpClient();
 
-                client.Connect(serverIP, Port);
+                client.Connect(PortIP.SERVERIP, Port);
                 stream = client.GetStream();
 
 
@@ -78,40 +99,46 @@ namespace OmokClient
             catch (Exception ex)
             {
 
-                MessageBox.Show("서버와 연결되지 않았습니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                System.Windows.Forms.MessageBox.Show("서버와 연결되지 않았습니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        public static void Send(byte[]sendBuffer,NetworkStream stream)
+
+
+        async private void FriendAddButton_Click(object sender, EventArgs e)
         {
-            stream.Write(sendBuffer, 0,sendBuffer.Length);
-            stream.Flush();
-            Array.Clear(sendBuffer, 0, sendBuffer.Length);
-        }
-
-        private void FriendAddButton_Click(object sender, EventArgs e)
-        {
-            MakeFriendPacket lobbyPacket = new MakeFriendPacket();
-            lobbyPacket.lobbyAction = ELobbyaction.ADDFRIEND;
-            Packet.Serialize(lobbyPacket).CopyTo(LobbysendBuffer, 0);
-            
-            Send(LobbysendBuffer, Lobbystream);
-
-            int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
-            MakeFriendPacket readMakeFriendPacket = (MakeFriendPacket)Packet.Desserialize(LobbyreadBuffer);
-
-            if (readMakeFriendPacket.bFriendAddSuccess == true)
-            {
-                FriendListBox.Items.Clear();
-                foreach(string list in readMakeFriendPacket.Friendlist)
+            MakeFriendPacket makeFriendPacket = new MakeFriendPacket(user);
+            MakeFriendPacket readMakeFriendPacket;
+            await Task.Run(()=>{
+                lock (Lobbylock)
                 {
-                    FriendListBox.Items.Add(list);
-                }
-                MessageBox.Show("친구 추가에 성공하였습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else {
-                MessageBox.Show("친구 추가에 실패하였습니다.", "실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    makeFriendPacket.addFriend.MyName = SendFriendBox.Text;
+                    Packet.Serialize(makeFriendPacket).CopyTo(LobbysendBuffer, 0);
 
-            }
+                    ClientIOMethod.Send(LobbysendBuffer, Lobbystream);
+
+                    int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
+                    readMakeFriendPacket = (MakeFriendPacket)Packet.Desserialize(LobbyreadBuffer);
+                }
+                if (readMakeFriendPacket.bFriendAddSuccess == true)
+                {
+
+                    Invoke((MethodInvoker)delegate
+                    {
+                        FriendListBox.Items.Clear();
+                        foreach (string list in readMakeFriendPacket.user.friendList)
+                        {
+                            FriendListBox.Items.Add(list);
+                        }
+                    });
+
+                    System.Windows.Forms.MessageBox.Show("친구 추가에 성공하였습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("친구 추가에 실패하였습니다.", "실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            });
 
         }
 
@@ -120,24 +147,28 @@ namespace OmokClient
             RefreshRoomlistPacket readRefreshPacket;
 
 
-            readRefreshPacket=await Task.Run(() =>
+            readRefreshPacket = await Task.Run(() =>
+              {
+                  RefreshRoomlistPacket refresh = new RefreshRoomlistPacket();
+                  Packet.Serialize(refresh).CopyTo(LobbysendBuffer, 0);
+
+                  ClientIOMethod.Send(LobbysendBuffer, Lobbystream);
+
+
+                  int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
+                  return (RefreshRoomlistPacket)Packet.Desserialize(LobbyreadBuffer);
+              });
+            Invoke((MethodInvoker)delegate
             {
-                RefreshRoomlistPacket refresh = new RefreshRoomlistPacket();
-                Packet.Serialize(refresh).CopyTo(LobbysendBuffer, 0);
-
-                Send(LobbysendBuffer, Lobbystream);
-
-
-                int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
-                 return (RefreshRoomlistPacket)Packet.Desserialize(LobbyreadBuffer);
+                RoomListBox.Items.Clear();
+                foreach (string list in readRefreshPacket.roomList)
+                {
+                    RoomListBox.Invoke(new Action(() =>
+                    {
+                        RoomListBox.Items.Add(list);
+                    }));
+                }
             });
-               
-            foreach (string list in readRefreshPacket.roomList)
-            {
-                RoomListBox.Invoke(new Action(() => {
-                    RoomListBox.Items.Add(list);
-                }));
-            }
         }
 
         private void FindRoomButton_Click(object sender, EventArgs e)
@@ -155,43 +186,117 @@ namespace OmokClient
                 if (listItem.Contains(searchText))
                 {
                     RoomListBox.SetSelected(i, true);
+                    RoomListBox.TopIndex = i;
                 }
+            }
+        }
+        private void MakeRoomButton_Click(object sender, EventArgs e)
+        {
+            MakeRoomForm makeRoomForm = new MakeRoomForm(Lobbystream, user);
+            makeRoomForm.MakeRoomRequested += HandleEnterRoomRequest;
+
+            makeRoomForm.ShowDialog();
+
+        }
+        private void HandleEnterRoomRequest(MakeRoomPacket packet)
+        {
+            if (packet.bmakeRoomSuccess == true)
+            {
+                
+                WaitingRoomForm waitingRoomForm = new WaitingRoomForm(packet.room, packet.user,Lobbystream);
+                this.Hide();
+                waitingRoomForm.ShowDialog();
+            }
+            else
+            {
+                return;
             }
         }
 
         async private void RoomListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            EnterRoom enterRoom=new EnterRoom(myName);
+            EnterRoomPacket enterRoom = new EnterRoomPacket(user);
             string selectedItemText = RoomListBox.SelectedItem.ToString();
-            enterRoom.roomName = selectedItemText;
+            enterRoom.room.roomName = selectedItemText;
             await Task.Run(() =>
             {
-                lock(Lobbylock)
+                lock (Lobbylock)
                 {
                     Packet.Serialize(enterRoom).CopyTo(LobbysendBuffer, 0);
 
-                    Send(LobbysendBuffer, Lobbystream);
+                    ClientIOMethod.Send(LobbysendBuffer, Lobbystream);
 
                     int read = Lobbystream.Read(LobbyreadBuffer, 0, 1024 * 4);
-                    enterRoom = (EnterRoom)Packet.Desserialize(LobbyreadBuffer);
+                    enterRoom = (EnterRoomPacket)Packet.Desserialize(LobbyreadBuffer);
                 }
                 if (enterRoom.bEnterRoom == true)
                 {
+                    chatClient.Close();
+
+                    chatStream.Close();
                     this.Hide();
                     this.Enabled = false;
-                    InRoomForm inRoomForm = new InRoomForm(myName,enterRoom.roomName);
+                    WaitingRoomForm inRoomForm = new WaitingRoomForm(enterRoom.room, user, Lobbystream);
                     inRoomForm.ShowDialog();
                     this.Show();
                     this.Enabled = true;
-
                 }
                 else
                 {
-                    MessageBox.Show("방 입장에 실패하였습니다.", "실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    System.Windows.Forms.MessageBox.Show("방 입장에 실패하였습니다.", "실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             });
+        }
+        private async void MessageSendEnter(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                SendMessagePacket sendMessagePacket = new SendMessagePacket(user);
+                sendMessagePacket.message = SendMessageBox.Text;
+                SendMessagePacket readmessagePacket;
+                await Task.Run(() =>
+                {
+                    lock (Chatlock)
+                    {
+                        Packet.Serialize(sendMessagePacket).CopyTo(ChatsendBuffer, 0);
+
+                        ClientIOMethod.Send(ChatsendBuffer, chatStream);
+
+                        int read = chatStream.Read(ChatreadBuffer, 0, 1024 * 4);
+                        readmessagePacket = (SendMessagePacket)Packet.Desserialize(ChatreadBuffer);
+                    }
+                });
+                Invoke((MethodInvoker)delegate
+                {
+                    SendMessageBox.Text = "";
+                });
+                e.Handled = true; 
+            }
             
         }
+        private async Task ReadChat(NetworkStream chatStream)
+        {
+            byte[] buffer = new byte[1024 * 4];
+            int bytesRead;
+            try
+            {
+                while ((bytesRead = await chatStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    SendMessagePacket readMessagePacket = (SendMessagePacket)Packet.Desserialize(buffer);
+                    Invoke((MethodInvoker)delegate
+                    {
+                        Messagebox.Text += Environment.NewLine + readMessagePacket.user.MyName + ":" + readMessagePacket.message;
+                    });
+
+                }
+
+            }
+            catch(InvalidOperationException ex)
+            {
+                Messagebox.Text += Environment.NewLine +ex+"ERR";
+            }
+        }
+
     }
 }

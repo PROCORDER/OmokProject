@@ -19,6 +19,7 @@ namespace OmokClient
         private TcpClient client;
         private NetworkStream stream;
         private bool connected = false;
+        UserInfo user;
         
         
 
@@ -30,45 +31,36 @@ namespace OmokClient
 
         private void Login_Load(object sender, EventArgs e)
         {
-            ConnectToServer();
+            ConnectToServer(PortIP.CHECKPORT,ref stream,ref client,ref connected);
 
         }
 
-        private void ConnectToServer()
+        public void ConnectToServer(int Port, ref NetworkStream stream, ref TcpClient client, ref bool connected)
         {
             try
             {
-              
-                string serverIP = "서버의 IP 주소"; 
-                int serverPort = 7777; 
 
-       
                 client = new TcpClient();
 
-                client.Connect(serverIP, serverPort);
+                client.Connect(PortIP.SERVERIP, Port);
                 stream = client.GetStream();
 
-                
+
                 connected = true;
+                Console.WriteLine("서버에 연결되었습니다.");
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("서버와 연결되지 않았습니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                System.Windows.Forms.MessageBox.Show("서버와 연결되지 않았습니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        public void Send()
-        {
-            stream.Write(this.sendBuffer, 0, this.sendBuffer.Length);
-            stream.Flush();
-            Array.Clear(sendBuffer, 0, sendBuffer.Length);
-        }
 
         private void SignupButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SignUpForm SignUpForm = new SignUpForm();
+            SignUpForm SignUpForm = new SignUpForm(stream);
             SignUpForm.ShowDialog();
             this.Show();
 
@@ -82,21 +74,20 @@ namespace OmokClient
                 MessageBox.Show("아이디와 비밀번호 모두 입력해주세요.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             LoginPacket loginPacket = new LoginPacket();
-            loginPacket.loginID = LoginIDTextBox.Text;
-            loginPacket.loginPW = LoginPWBox.Text;
+            loginPacket.user.MyId = LoginIDTextBox.Text;
+            loginPacket.user.MyPw = LoginPWBox.Text;
+            user = loginPacket.user;
             Packet.Serialize(loginPacket).CopyTo(sendBuffer, 0);
 
-            Send();
+            ClientIOMethod.Send(sendBuffer,stream);
             
             int read = stream.Read(readBuffer, 0, 1024 * 4);
             LoginPacket readLoginPacket=(LoginPacket)Packet.Desserialize(readBuffer);
             if (readLoginPacket.loginCheck == true)
             {
                 this.Hide();
-                Robby RobbyForm = new Robby();
-                RobbyForm.myName = readLoginPacket.loginName;
-                RobbyForm.myName = readLoginPacket.loginID;
-                RobbyForm.ShowDialog();
+                Lobby LobbyForm = new Lobby(user);
+                LobbyForm.ShowDialog();
                 this.Close();
             }
             else

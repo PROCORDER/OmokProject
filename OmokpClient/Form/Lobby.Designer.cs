@@ -1,7 +1,7 @@
 ﻿
 namespace OmokClient
 {
-    partial class Robby
+    partial class Lobby
     {
         /// <summary>
         /// Required designer variable.
@@ -31,14 +31,14 @@ namespace OmokClient
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.Messagebox = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.Robbymessagebox = new System.Windows.Forms.TextBox();
+            this.SendMessageBox = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.FriendAddButton = new System.Windows.Forms.Button();
-            this.SendMessageBox = new System.Windows.Forms.TextBox();
+            this.SendFriendBox = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.FriendListBox = new System.Windows.Forms.ListBox();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -71,7 +71,7 @@ namespace OmokClient
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox4);
+            this.panel1.Controls.Add(this.Messagebox);
             this.panel1.Controls.Add(this.panel8);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(977, 0);
@@ -79,33 +79,34 @@ namespace OmokClient
             this.panel1.Size = new System.Drawing.Size(387, 677);
             this.panel1.TabIndex = 0;
             // 
-            // textBox4
+            // Messagebox
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(0, 0);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox4.Size = new System.Drawing.Size(387, 591);
-            this.textBox4.TabIndex = 4;
+            this.Messagebox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Messagebox.Location = new System.Drawing.Point(0, 0);
+            this.Messagebox.Multiline = true;
+            this.Messagebox.Name = "Messagebox";
+            this.Messagebox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Messagebox.Size = new System.Drawing.Size(387, 591);
+            this.Messagebox.TabIndex = 4;
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.Robbymessagebox);
+            this.panel8.Controls.Add(this.SendMessageBox);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel8.Location = new System.Drawing.Point(0, 591);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(387, 86);
             this.panel8.TabIndex = 3;
             // 
-            // Robbymessagebox
+            // SendMessageBox
             // 
-            this.Robbymessagebox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Robbymessagebox.Location = new System.Drawing.Point(0, 0);
-            this.Robbymessagebox.Multiline = true;
-            this.Robbymessagebox.Name = "Robbymessagebox";
-            this.Robbymessagebox.Size = new System.Drawing.Size(387, 86);
-            this.Robbymessagebox.TabIndex = 0;
+            this.SendMessageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SendMessageBox.Location = new System.Drawing.Point(0, 0);
+            this.SendMessageBox.Multiline = true;
+            this.SendMessageBox.Name = "SendMessageBox";
+            this.SendMessageBox.Size = new System.Drawing.Size(387, 86);
+            this.SendMessageBox.TabIndex = 0;
+            this.SendMessageBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MessageSendEnter);
             // 
             // panel2
             // 
@@ -130,7 +131,7 @@ namespace OmokClient
             // panel11
             // 
             this.panel11.Controls.Add(this.FriendAddButton);
-            this.panel11.Controls.Add(this.SendMessageBox);
+            this.panel11.Controls.Add(this.SendFriendBox);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel11.Location = new System.Drawing.Point(0, 412);
             this.panel11.Name = "panel11";
@@ -147,12 +148,12 @@ namespace OmokClient
             this.FriendAddButton.UseVisualStyleBackColor = true;
             this.FriendAddButton.Click += new System.EventHandler(this.FriendAddButton_Click);
             // 
-            // SendMessageBox
+            // SendFriendBox
             // 
-            this.SendMessageBox.Location = new System.Drawing.Point(0, 3);
-            this.SendMessageBox.Name = "SendMessageBox";
-            this.SendMessageBox.Size = new System.Drawing.Size(259, 25);
-            this.SendMessageBox.TabIndex = 0;
+            this.SendFriendBox.Location = new System.Drawing.Point(0, 3);
+            this.SendFriendBox.Name = "SendFriendBox";
+            this.SendFriendBox.Size = new System.Drawing.Size(259, 25);
+            this.SendFriendBox.TabIndex = 0;
             // 
             // panel10
             // 
@@ -283,7 +284,7 @@ namespace OmokClient
             this.MakeRoomButton.Name = "MakeRoomButton";
             this.MakeRoomButton.Size = new System.Drawing.Size(104, 54);
             this.MakeRoomButton.TabIndex = 7;
-            this.MakeRoomButton.Text = "찾기";
+            this.MakeRoomButton.Text = "방만들기";
             this.MakeRoomButton.UseVisualStyleBackColor = true;
             this.MakeRoomButton.Click += new System.EventHandler(this.FindRoomButton_Click);
             // 
@@ -320,7 +321,7 @@ namespace OmokClient
             // 
             this.RefreshRoomList.Tick += new System.EventHandler(this.RefreshRoomList_Tick);
             // 
-            // Robby
+            // Lobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -328,9 +329,9 @@ namespace OmokClient
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "Robby";
+            this.Name = "Lobby";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Robby_Load);
+            this.Load += new System.EventHandler(this.Lobby_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -362,13 +363,13 @@ namespace OmokClient
         private System.Windows.Forms.ListBox RoomListBox;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox Messagebox;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TextBox Robbymessagebox;
+        private System.Windows.Forms.TextBox SendMessageBox;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Button FriendAddButton;
-        private System.Windows.Forms.TextBox SendMessageBox;
+        private System.Windows.Forms.TextBox SendFriendBox;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.ListBox FriendListBox;
         private System.Windows.Forms.Panel panel6;

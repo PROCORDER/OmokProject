@@ -85,16 +85,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LobbyPacket.cs" />
-    <Compile Include="LoginPacket.cs" />
-    <Compile Include="MessagePacket.cs" />
-    <Compile Include="Packet.cs" />
+    <Compile Include="ClientIOMethod.cs" />
+    <Compile Include="LobbyClosedPacket.cs" />
+    <Compile Include="Packets\LobbyPacket.cs" />
+    <Compile Include="Packets\LoginPacket.cs" />
+    <Compile Include="Packets\MakeFriendPacket.cs" />
+    <Compile Include="Packets\MessagePacket.cs" />
+    <Compile Include="Packets\Packet.cs" />
+    <Compile Include="PortandIP\PortIP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignUpPacket.cs" />
+    <Compile Include="Info\RoomInfo.cs" />
+    <Compile Include="Packets\SignUpPacket.cs" />
+    <Compile Include="Info\UserInfo.cs" />
+    <Compile Include="Packets\WaitingRoomPacket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

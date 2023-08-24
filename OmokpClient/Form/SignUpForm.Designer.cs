@@ -198,7 +198,6 @@ namespace OmokClient
             this.Name = "SignUpForm";
             this.Text = "SignUp";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SignUpFormClosed);
-            this.Load += new System.EventHandler(this.SignUpForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

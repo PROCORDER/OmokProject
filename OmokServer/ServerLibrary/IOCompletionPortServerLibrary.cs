@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Threading;
 using OmokPacket;
 using ServerLibrary;
+using System.Collections.Concurrent;
 
 namespace ServerLibrary
 {
@@ -105,7 +106,7 @@ namespace ServerLibrary
             }
 
         }
-        public static byte[] LobbyLoadProcess( LobbyloadPacket sendLobbyLoadPacket)
+        public static void LobbyLoadProcess(ConcurrentDictionary<Guid, ClientStateInfo> clients, Guid client, LobbyloadPacket sendLobbyLoadPacket)
         {
             byte[] sendBuffer = new byte[1024 * 4];
             string connectionString = "Server=localhost;Database=accounts;User Id=root;Password=1234;";
@@ -155,10 +156,10 @@ namespace ServerLibrary
 
             }
             Packet.Serialize(sendLobbyLoadPacket).CopyTo(sendBuffer, 0);
-            return sendBuffer;
+            LobbyandWaitingSendMethod.LobbyActionSend(clients, sendBuffer, client);
         }
 
-        public static byte[] RefreshLobbyLoadProcess( RefreshRoomlistPacket sendRoomListPacket)
+        public static void RefreshLobbyLoadProcess(ConcurrentDictionary<Guid, ClientStateInfo> clients, Guid client, RefreshRoomlistPacket sendRoomListPacket)
         {
             byte[] sendBuffer = new byte[1024 * 4];
             string connectionString = "Server=localhost;Database=accounts;User Id=root;Password=1234;";
@@ -181,15 +182,17 @@ namespace ServerLibrary
 
             }
             Packet.Serialize(sendRoomListPacket).CopyTo(sendBuffer, 0);
-            return sendBuffer;
+            LobbyandWaitingSendMethod.LobbyActionSend(clients, sendBuffer, client);
         }
 
-        public static byte[] EnterRoomProcess(EnterRoomPacket sendEnterRoomPacket)
+        public static void EnterRoomProcess(ConcurrentDictionary<Guid, ClientStateInfo> clients, Guid client,  EnterRoomPacket sendEnterRoomPacket)
         {
             byte[] sendBuffer = new byte[1024 * 4];
             string connectionString = "Server=localhost;Database=accounts;User Id=root;Password=1234;";
             string checkId = sendEnterRoomPacket.user.MyId; // 입력한 ID
             string roomName = sendEnterRoomPacket.room.roomName;
+            List<Guid> sendClientList = new List<Guid>();
+            sendClientList.Add(client);
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -204,16 +207,10 @@ namespace ServerLibrary
                     {
                         if (reader.Read()&&LobbyMethod.bIsEmptyPlayer(connectionString,roomName))
                         {
-
-                            sendEnterRoomPacket.room.Observer1.MyId = reader["Observer1"].ToString();
-                            sendEnterRoomPacket.room.Observer2.MyId = reader["Observer2"].ToString();
-                            sendEnterRoomPacket.room.Observer3.MyId = reader["Observer3"].ToString();
-                            sendEnterRoomPacket.room.host.MyId = reader["Host"].ToString();
-
-                            LobbyMethod.AllPlayerCheck(sendEnterRoomPacket);
+                            LobbyMethod.NullValueCheckAndInsert(reader, ref sendEnterRoomPacket,connection,out sendClientList);
 
                             sendEnterRoomPacket.bEnterRoom = true;
-                            LobbyMethod.UpdatePlayerInRoom( sendEnterRoomPacket, connectionString);
+                            LobbyMethod.UpdatePlayerInRoom( ref sendEnterRoomPacket, connectionString);
                         }
                         else
                         {
@@ -222,10 +219,11 @@ namespace ServerLibrary
                     }
                 }         
                 Packet.Serialize(sendEnterRoomPacket).CopyTo(sendBuffer, 0);
-                return sendBuffer;
+
             }
+            LobbyandWaitingSendMethod.EnterRoomSend(clients, sendClientList, sendBuffer);
         }
-        public static byte[] MakeRoomProcess(MakeRoomPacket sendMakeRoomPacket)
+        public static void MakeRoomProcess(ConcurrentDictionary<Guid, ClientStateInfo> clients, Guid client, MakeRoomPacket sendMakeRoomPacket)
         {
             byte[] sendBuffer = new byte[1024 * 4];
            
@@ -242,11 +240,11 @@ namespace ServerLibrary
             }
   
             Packet.Serialize(sendMakeRoomPacket).CopyTo(sendBuffer, 0);
-            return sendBuffer;
+            LobbyandWaitingSendMethod.LobbyActionSend(clients, sendBuffer, client);
 
         }
 
-        public static byte[] MakeFriendProcess(MakeFriendPacket sendMakeRoomPacket)
+        public static void MakeFriendProcess(ConcurrentDictionary<Guid, ClientStateInfo> clients, Guid client, MakeFriendPacket sendMakeRoomPacket)
         {
             byte[] sendBuffer = new byte[1024 * 4];
             string myId = sendMakeRoomPacket.user.MyId; // 입력한 ID
@@ -260,7 +258,8 @@ namespace ServerLibrary
                 sendMakeRoomPacket.bFriendAddSuccess = false;
             }
             Packet.Serialize(sendMakeRoomPacket).CopyTo(sendBuffer, 0);
-            return sendBuffer;
+            LobbyandWaitingSendMethod.LobbyActionSend(clients, sendBuffer, client);
         }
+        
     }
 }

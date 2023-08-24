@@ -20,13 +20,14 @@ C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\x64\Debug\System.Numeric
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.csproj.AssemblyReference.cache
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.Login.resources
-C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.InRoomForm.resources
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.PlayGameForm.resources
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.Properties.Resources.resources
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.SignUpForm.resources
-C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.Robby.resources
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.csproj.GenerateResource.cache
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.csproj.CoreCompileInputs.cache
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.csproj.CopyComplete
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.exe
 C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.pdb
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.Lobby.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.WaitingRoomForm.resources
+C:\Users\user\Desktop\study\OMOKproject\OmokpClient\obj\x64\Debug\OmokClient.MakeRoomForm.resources

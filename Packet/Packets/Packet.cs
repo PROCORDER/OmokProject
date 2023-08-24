@@ -12,12 +12,13 @@ namespace OmokPacket
     public enum PacketType
     {
         LOGIN = 0,
-        SIGNUP,
-        LOBBY,
-        PLAYGAME,
-        INROOM,
-        SENDMESSAGE,
-        LOBBYLOAD
+        SIGNUP=1,
+        LOBBY=2,
+        PLAYGAME=3,
+        WAITINGROOM=4,
+        SENDMESSAGE=5,
+        MAKEFRIEND,
+        ERR
 
     }
 
@@ -31,6 +32,8 @@ namespace OmokPacket
         public int length { get; set; }
         [ProtoMember(3)]
         public PacketType type{get; set;}
+        [ProtoMember(4)]
+        public UserInfo user { get; set; }
         public Packet()
         {
             this.length = 4096;

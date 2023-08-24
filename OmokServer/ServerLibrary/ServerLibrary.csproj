@@ -117,6 +117,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientStateInfo.cs" />
+    <Compile Include="LobbyandWaitingSendMethod.cs" />
+    <Compile Include="MySQLIOWaitingRoom.cs" />
     <Compile Include="IOCompletionPortServerLibrary.cs" />
     <Compile Include="LobbyMethod.cs" />
     <Compile Include="PacketProcess.cs" />

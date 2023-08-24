@@ -9,7 +9,11 @@ namespace OmokPacket
         public class SendMessagePacket : Packet
         {
             public string message { get; set; }
-            public int roomCode { get; set; }
+            public  RoomInfo room { get; set; }
+            public SendMessagePacket(UserInfo user)
+            {
+                this.user = user;
+            }
 
         }
 }

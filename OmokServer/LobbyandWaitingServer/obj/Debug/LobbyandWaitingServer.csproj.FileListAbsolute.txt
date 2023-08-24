@@ -1,0 +1,3 @@
+C:\Users\user\Desktop\study\OMOKproject\OmokServer\LobbyandWaitingServer\obj\Debug\LobbyandWaitingServer.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\study\OMOKproject\OmokServer\LobbyandWaitingServer\obj\Debug\LobbyandWaitingServer.exe.config
+C:\Users\user\Desktop\study\OMOKproject\OmokServer\LobbyandWaitingServer\obj\Debug\LobbyandWaitingServer.csproj.CoreCompileInputs.cache
